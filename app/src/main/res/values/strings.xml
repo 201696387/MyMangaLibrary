@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyMangaLibrary</string>
+    <string name="title_activity_manga_list">ActivityMangaList</string>
+</resources>
