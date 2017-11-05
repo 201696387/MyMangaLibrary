@@ -26,9 +26,13 @@ public class MangaLibrarySystem {
     //endregion
 
     public void init(Context context, ProgressBar progressBar, CheckingSystem checkingSystem){
+        //TODO: check if Files exists
         progressBar.setProgress(25);
+        //TODO: check if Internet Connected
         progressBar.setProgress(50);
+        //TODO: check if Manga info changed
         progressBar.setProgress(75);
+        //TODO: check if Everything works fine
         progressBar.setProgress(100);
 
         checkingSystem.allOK();

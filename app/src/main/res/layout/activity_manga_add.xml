@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ca.jfmcode.mymangalibrary.Activity.ActivityMangaAdd"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:id="@+id/act_mangaadd_nameLL"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/act_mangaadd_nameET"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:hint="@string/manga_name"
+            android:textAlignment="center"
+            android:background="#fff"/>
+
+        <ImageView
+            android:id="@+id/act_mangaadd_searchIV"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_search"
+            android:background="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/act_mangaadd_urlET"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/act_mangaadd_nameLL"
+        android:layout_centerHorizontal="true"
+        android:background="#fff"
+        android:hint="@string/url"
+        android:textAlignment="center"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:id="@+id/act_mangaadd_saveLL"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="@string/save"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_save"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

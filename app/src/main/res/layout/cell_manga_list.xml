@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/cell_manga_imageIV"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cell_manga_titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Manga Title"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ch."/>
+            <TextView
+                android:id="@+id/cell_manga_chapterTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="000"/>
+            <ImageView
+                android:id="@+id/cell_manga_newIV"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="invisible"
+                android:src="@android:drawable/star_on"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package ca.jfmcode.mymangalibrary.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,29 +12,30 @@ import ca.jfmcode.mymangalibrary.R;
 
 public class ActivityMangaList extends AppCompatActivity {
 
+    private final int MANGACODE = 456;
+
     private FloatingActionButton addButton;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manga_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.act_mangalist_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton addButton = (FloatingActionButton) findViewById(R.id.fab);
+        addButton = (FloatingActionButton) findViewById(R.id.act_mangalist_addmangaFAB);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 floatingAddButton();
             }
         });
     }
 
     private void floatingAddButton(){
-
+        startActivityForResult(new Intent(ActivityMangaList.this, ActivityMangaAdd.class), MANGACODE);
     }
 
 }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">My Manga Library</string>
-    <string name="title_activity_manga_list">ActivityMangaList</string>
+    <string name="all">ALL</string>
+    <string name="read">READ</string>
+    <string name="unread">UNREAD</string>
+    <string name="manga_name">Manga name</string>
+    <string name="url">URL</string>
+    <string name="save">SAVE</string>
 </resources>

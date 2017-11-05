@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,4 +8,36 @@
     tools:context="ca.jfmcode.mymangalibrary.Activity.ActivityMangaList"
     tools:showIn="@layout/activity_manga_list">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/act_mangalist_tablayoutTL">
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/act_mangalist_tab1ALLTI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/act_mangalist_tab2READTI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/read" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/act_mangalist_tab3UNREADTI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unread" />
+
+    </android.support.design.widget.TabLayout>
+
+    <ListView
+        android:id="@+id/act_mangalist_listLV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/act_mangalist_tablayoutTL" />
+</RelativeLayout>
