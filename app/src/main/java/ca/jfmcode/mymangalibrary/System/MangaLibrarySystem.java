@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.ProgressBar;
 
+import ca.jfmcode.mymangalibrary.Activity.ActivityLogin;
 import ca.jfmcode.mymangalibrary.Activity.ActivityMangaList;
 import ca.jfmcode.mymangalibrary.Tools.CheckingSystem;
 
@@ -28,7 +29,10 @@ public class MangaLibrarySystem {
     public void init(Context context, ProgressBar progressBar, CheckingSystem checkingSystem){
         //TODO: check if Files exists
         progressBar.setProgress(25);
-        //TODO: check if Internet Connected
+        //TODO: check if Internet Connected and Logged In
+
+        getLogin(context);
+        /*
         progressBar.setProgress(50);
         //TODO: check if Manga info changed
         progressBar.setProgress(75);
@@ -36,5 +40,11 @@ public class MangaLibrarySystem {
         progressBar.setProgress(100);
 
         checkingSystem.allOK();
+        //*/
+    }
+
+    private void getLogin(Context context){
+        context.startActivity(new Intent(context, ActivityLogin.class));
     }
 }
+// https://myanimelist.net/api/manga/search.xml?q=bleach

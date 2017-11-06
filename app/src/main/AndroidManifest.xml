@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.jfmcode.mymangalibrary">
+    package="ca.jfmcode.mymangalibrary">\
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -25,7 +27,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.ActivityMangaViewInfo" />
         <activity android:name=".Activity.ActivityMangaAdd" />
-        <activity android:name=".Activity.ActivityMangaEdit"></activity>
+        <activity android:name=".Activity.ActivityMangaEdit" />
+        <activity
+            android:name=".Activity.ActivityLogin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.ActivitySignUp"></activity>
     </application>
 
 </manifest>
