@@ -30,7 +30,7 @@ public class MangaLibrarySystem {
         //TODO: check if Files exists
         progressBar.setProgress(25);
         //TODO: check if Internet Connected and Logged In
-
+        MALSystem.getInstance().init();
         getLogin(context);
         /*
         progressBar.setProgress(50);

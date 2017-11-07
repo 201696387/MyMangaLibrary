@@ -20,25 +20,24 @@ public class Profile {
     //endregion
 
     //region setter methods
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
     //endregion
 
-    public boolean login(String user, String password){
-        setUsername(user);
-        setPassword(password);
+    public void login(String response){
+        //TODO: interpret the response and rip the contents from the xml response
 
-        //TODO: send request to authenticate with "curl -u user:password https://myanimelist.net/api/account/verify_credentials.xml" and get ID
-
-        return false;
+        //int firstIndexOfID = response.lastIndexOf("<id>");
+        //int lastIndexOfID = response.indexOf("</id>");
+        //String id = response.substring(firstIndexOfID,lastIndexOfID);
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ca.jfmcode.mymangalibrary.R;
+import ca.jfmcode.mymangalibrary.System.MALSystem;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class ActivityLogin extends AppCompatActivity {
                 login(user, pass);
             }
         });
+
     }
 
     private void signup(){
@@ -60,6 +62,6 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private void login(String user, String pass){
-
+        MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user+":"+pass);
     }
 }
