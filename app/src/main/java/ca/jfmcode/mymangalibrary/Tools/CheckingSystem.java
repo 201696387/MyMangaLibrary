@@ -5,5 +5,7 @@ package ca.jfmcode.mymangalibrary.Tools;
  */
 
 public interface CheckingSystem {
+    void callLogin();
     void allOK();
+    void error(String message);
 }

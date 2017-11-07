@@ -1,6 +1,11 @@
 package ca.jfmcode.mymangalibrary.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +16,7 @@ import android.widget.TextView;
 
 import ca.jfmcode.mymangalibrary.R;
 import ca.jfmcode.mymangalibrary.System.MALSystem;
+import ca.jfmcode.mymangalibrary.Tools.MALAuthListener;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -77,6 +83,39 @@ public class ActivityLogin extends AppCompatActivity {
             return;
         }
 
-        MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user, pass);
+        MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user, pass, new MALAuthListener() {
+            @Override
+            public void success() {
+                setResult(7);
+                finish();
+            }
+
+            @Override
+            public void error() {
+                //TODO: Display error message dialog
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Drawable icon = ContextCompat.getDrawable(ActivityLogin.this, android.R.drawable.ic_dialog_alert);
+        DrawableCompat.setTint(icon, ContextCompat.getColor(ActivityLogin.this, R.color.colorAccent));
+
+        new AlertDialog.Builder(this)
+                .setIcon(icon)
+                .setTitle("Closing App")
+                .setMessage("Are you sure you want to exit this app?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setResult(1);
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

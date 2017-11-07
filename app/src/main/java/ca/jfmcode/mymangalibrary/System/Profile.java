@@ -1,5 +1,8 @@
 package ca.jfmcode.mymangalibrary.System;
 
+import android.text.TextUtils;
+import android.widget.Toast;
+
 /**
  * Created by ONi on 05/11/2017.
  */
@@ -49,11 +52,18 @@ public class Profile {
     }
 
     public void authenticated(String response){
-        //TODO: interpret the response and rip the contents from the xml response
 
-        //int firstIndexOfID = response.lastIndexOf("<id>");
-        //int lastIndexOfID = response.indexOf("</id>");
-        //String id = response.substring(firstIndexOfID,lastIndexOfID);
+        if(response == null || response.length()<1)
+            return;
 
+        int firstIndexOfID = response.indexOf("<id>")+4;
+        int lastIndexOfID = response.indexOf("</id>");
+        String id = response.substring(firstIndexOfID,lastIndexOfID);
+
+        try{
+            setId(Integer.parseInt(id));
+        }catch (Exception e){
+            //TODO: Log parseInt error
+        }
     }
 }
