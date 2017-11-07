@@ -3,6 +3,7 @@ package ca.jfmcode.mymangalibrary.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +63,20 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     private void login(String user, String pass){
-        MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user+":"+pass);
+        if(TextUtils.isEmpty(user)){
+            EditText username = (EditText)findViewById(R.id.act_login_userET);
+            username.setError("Please enter username");
+            username.requestFocus();
+            return;
+        }
+
+        if(TextUtils.isEmpty(pass)){
+            EditText password = (EditText)findViewById(R.id.act_login_passET);
+            password.setError("Please enter password");
+            password.requestFocus();
+            return;
+        }
+
+        MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user, pass);
     }
 }

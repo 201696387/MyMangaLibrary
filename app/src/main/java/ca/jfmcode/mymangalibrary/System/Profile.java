@@ -33,11 +33,27 @@ public class Profile {
     }
     //endregion
 
-    public void login(String response){
+    //region getter methods
+    public boolean isAuthenticated() {
+        if (id > -1) {
+            return true;
+        }
+
+        return false;
+    }
+    //endregion
+
+    public void login(String user, String pass){
+        setUsername(user);
+        setPassword(pass);
+    }
+
+    public void authenticated(String response){
         //TODO: interpret the response and rip the contents from the xml response
 
         //int firstIndexOfID = response.lastIndexOf("<id>");
         //int lastIndexOfID = response.indexOf("</id>");
         //String id = response.substring(firstIndexOfID,lastIndexOfID);
+
     }
 }
