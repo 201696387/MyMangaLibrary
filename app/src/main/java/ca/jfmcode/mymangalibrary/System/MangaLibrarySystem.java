@@ -99,6 +99,23 @@ public class MangaLibrarySystem {
         //*/
     }
 
+    private void authentication(final CheckingSystem checkingSystem){
+
+        //PART 2.5 -- AUTHENTICATION
+        if(gotInternet) { //Check if there's a connection to https://myanimelist.net/
+            if (gotFiles) { //Check if encrypted File exists
+                //TODO: get Profile objected from encrypted File
+                //MALSystem.getInstance().init(profile);
+            } else {
+                MALSystem.getInstance().init();
+                checkingSystem.callLogin();
+            }
+        } else{
+            //TODO: Show error dialog message about connection error to MAL and quit app
+            checkingSystem.error("Authentication error!");
+        }
+    }
+
     public void updateMangaInfo(final Context context, final ProgressBar progressBar){
         //PART 3 -- MANGALIST UPDATE
         //TODO: check if Manga info changed
@@ -168,23 +185,6 @@ public class MangaLibrarySystem {
 
         fileCheckListener.noFiles();
         return false;
-    }
-
-    private void authentication(final CheckingSystem checkingSystem){
-
-        //PART 2.5 -- AUTHENTICATION
-        if(gotInternet) { //Check if there's a connection to https://myanimelist.net/
-            if (gotFiles) { //Check if encrypted File exists
-                //TODO: get Profile objected from encrypted File
-                //MALSystem.getInstance().init(profile);
-            } else {
-                MALSystem.getInstance().init();
-                checkingSystem.callLogin();
-            }
-        } else{
-            //TODO: Show error dialog message about connection error to MAL and quit app
-            checkingSystem.error("Authentication error!");
-        }
     }
 }
 // https://myanimelist.net/api/manga/search.xml?q=bleach
