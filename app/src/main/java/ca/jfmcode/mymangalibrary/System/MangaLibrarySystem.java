@@ -1,18 +1,11 @@
 package ca.jfmcode.mymangalibrary.System;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.net.ConnectivityManagerCompat;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.net.InetAddress;
-
-import ca.jfmcode.mymangalibrary.Activity.ActivityLaunch;
-import ca.jfmcode.mymangalibrary.Activity.ActivityLogin;
-import ca.jfmcode.mymangalibrary.Activity.ActivityMangaList;
 import ca.jfmcode.mymangalibrary.Tools.CheckingSystem;
 import ca.jfmcode.mymangalibrary.Tools.FileCheckListener;
 import ca.jfmcode.mymangalibrary.Tools.InternetCheckListener;
@@ -23,7 +16,7 @@ import ca.jfmcode.mymangalibrary.Tools.InternetCheckListener;
 
 public class MangaLibrarySystem {
 
-    private final String MALURL = "myanimelist.net";
+    private boolean gotSysFiles = false;
     private boolean gotFiles = false;
     private boolean gotInternet = false;
 
@@ -51,13 +44,20 @@ public class MangaLibrarySystem {
     public void init(final Context context, final ProgressBar progressBar, final CheckingSystem chSys){
         this.checkingSystem = chSys;
 
-        //PART 1 -- FILE CHECKING
-        gotFiles = checkFiles(new FileCheckListener() {
-            @Override
-            public void filesFound() {
-                incrementPB(progressBar, 25);
+        MangaFileManager.getInstance().init(context);
 
-                Toast.makeText(context, "Files found", Toast.LENGTH_SHORT).show(); //debug
+        //PART 1 -- FILE CHECKING
+        gotFiles = checkFiles(context, new FileCheckListener() {
+            @Override
+            public void sysFileFound() {
+                incrementPB(progressBar, 10);
+            }
+
+            @Override
+            public void allFilesFound() {
+                incrementPB(progressBar, 15);
+
+                Toast.makeText(context, "All Files found", Toast.LENGTH_SHORT).show(); //debug
                 //TODO: log file_check success
             }
 
@@ -66,7 +66,15 @@ public class MangaLibrarySystem {
                 incrementPB(progressBar, 25);
 
                 Toast.makeText(context, "Files not found", Toast.LENGTH_SHORT).show(); //debug
-                //TODO: log file_check success and file not found
+                //TODO: log file_check all files not found
+            }
+
+            @Override
+            public void missingMangaFile() {
+                incrementPB(progressBar, 15);
+
+                Toast.makeText(context, "Manga file not found", Toast.LENGTH_SHORT).show(); //debug
+                //TODO: log file_check manga file not found
             }
 
             @Override
@@ -86,7 +94,7 @@ public class MangaLibrarySystem {
                 Toast.makeText(context, "Internet is ok", Toast.LENGTH_SHORT).show(); //debug
                 //TODO: log internet_check success
 
-                authentication(checkingSystem); //PART 2.5 <-- HERE
+                authentication(context, progressBar, checkingSystem); //PART 2.5 <-- HERE
             }
 
             @Override
@@ -99,13 +107,16 @@ public class MangaLibrarySystem {
         //*/
     }
 
-    private void authentication(final CheckingSystem checkingSystem){
+    private void authentication(Context context, ProgressBar progressBar, final CheckingSystem checkingSystem){
 
         //PART 2.5 -- AUTHENTICATION
         if(gotInternet) { //Check if there's a connection to https://myanimelist.net/
-            if (gotFiles) { //Check if encrypted File exists
-                //TODO: get Profile objected from encrypted File
-                //MALSystem.getInstance().init(profile);
+            if (gotSysFiles) { //Check if encrypted File exists
+                MangaFileManager.getInstance().readSysFile(context);
+
+                if(MALSystem.getInstance().isAuth()){
+                    updateMangaInfo(context, progressBar);
+                }
             } else {
                 MALSystem.getInstance().init();
                 checkingSystem.callLogin();
@@ -161,7 +172,7 @@ public class MangaLibrarySystem {
         //NOTE: For some reason it returns null
 
         try {
-            InetAddress ipAddr = InetAddress.getByName(MALURL);
+            InetAddress ipAddr = InetAddress.getByName(FinalVariables.MALURL);
             if(!ipAddr.equals("")){
                 internetCheckListener.internetOK();
             }
@@ -175,15 +186,27 @@ public class MangaLibrarySystem {
         }//*/
     }
 
-    private boolean checkFiles(FileCheckListener fileCheckListener){
-        //TODO: check if Files exists
+    private boolean checkFiles(Context context, FileCheckListener fileCheckListener){
         try{
-
+            if(MangaFileManager.getInstance().checkSysFile(context)){
+                fileCheckListener.sysFileFound();
+                gotSysFiles = true;
+            }
+            else{
+                fileCheckListener.noFiles();
+                return false;
+            }
+            if(MangaFileManager.getInstance().checkMangaListFile(context)){
+                fileCheckListener.allFilesFound();
+                return true;
+            }
+            else{
+                fileCheckListener.missingMangaFile();
+            }
         }catch (Exception e){
             fileCheckListener.error("checkFiles Error : "+e.getMessage());
         }
 
-        fileCheckListener.noFiles();
         return false;
     }
 }

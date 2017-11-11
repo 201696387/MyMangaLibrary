@@ -64,6 +64,8 @@ public class MALSystem {
                 Toast.makeText(context, "Auth Success : "+response, Toast.LENGTH_LONG).show();
 
                 profile.authenticated(response);
+                MangaFileManager.getInstance().writeSysFile(context, profile); //saves the profile obj to avoid logging-in every time
+
                 malAuthListener.success();
             }
         }, new Response.ErrorListener() {

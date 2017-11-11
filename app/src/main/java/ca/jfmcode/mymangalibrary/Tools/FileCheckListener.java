@@ -5,7 +5,9 @@ package ca.jfmcode.mymangalibrary.Tools;
  */
 
 public interface FileCheckListener {
-    void filesFound();
+    void sysFileFound();
+    void allFilesFound();
     void noFiles();
+    void missingMangaFile();
     void error(String message);
 }

@@ -7,12 +7,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import ca.jfmcode.mymangalibrary.R;
+import ca.jfmcode.mymangalibrary.System.FinalVariables;
 import ca.jfmcode.mymangalibrary.System.MangaLibrarySystem;
 import ca.jfmcode.mymangalibrary.Tools.CheckingSystem;
 
 public class ActivityLaunch extends AppCompatActivity {
 
     private ProgressBar loading;
+    private final int pbMax = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,7 @@ public class ActivityLaunch extends AppCompatActivity {
         setContentView(R.layout.activity_launch);
 
         loading = (ProgressBar)findViewById(R.id.act_launch_loadingPB);
-        loading.setMax(100);
+        loading.setMax(pbMax);
 
         MangaLibrarySystem.getInstance().init(ActivityLaunch.this, loading, new CheckingSystem() {
             @Override
@@ -42,7 +44,7 @@ public class ActivityLaunch extends AppCompatActivity {
     }
 
     public void callLoginActivity(){
-        startActivityForResult(new Intent(ActivityLaunch.this, ActivityLogin.class), 123);
+        startActivityForResult(new Intent(ActivityLaunch.this, ActivityLogin.class), FinalVariables.LOGINREQCODE);
     }
 
     private void systemChecked(){
@@ -54,11 +56,11 @@ public class ActivityLaunch extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 123) { //Login Activity
-            if(resultCode == 1){ //exit app
+        if(requestCode == FinalVariables.LOGINREQCODE) { //Login Activity
+            if(resultCode == FinalVariables.EXITAPPCODE){ //exit app
                 finish();
             }
-            if(resultCode == 7){
+            if(resultCode == FinalVariables.UPDATEMANGAINFOCODE){
                 MangaLibrarySystem.getInstance().updateMangaInfo(ActivityLaunch.this, loading);
             }
         }

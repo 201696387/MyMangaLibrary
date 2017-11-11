@@ -3,6 +3,8 @@ package ca.jfmcode.mymangalibrary.System;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 /**
  * Created by ONi on 05/11/2017.
  */
@@ -19,6 +21,16 @@ public class Profile {
         id=-1;
         username="";
         password="";
+    }
+
+    public Profile(HashMap<String,String> input){
+        try {
+            id = Integer.parseInt(input.get(FinalVariables.IDKEY));
+            username = input.get(FinalVariables.USERNAMEKEY);
+            password = input.get(FinalVariables.PASSWORDKEY);
+        } catch (Exception e){ //catch parseInt error
+            //TODO: Log error message
+        }
     }
     //endregion
 
@@ -65,5 +77,15 @@ public class Profile {
         }catch (Exception e){
             //TODO: Log parseInt error
         }
+    }
+
+    public HashMap<String, String> getHashMap(){
+        HashMap<String, String> result = new HashMap<>();
+
+        result.put(FinalVariables.IDKEY, ""+id);
+        result.put(FinalVariables.USERNAMEKEY, username);
+        result.put(FinalVariables.PASSWORDKEY, password);
+
+        return result;
     }
 }
