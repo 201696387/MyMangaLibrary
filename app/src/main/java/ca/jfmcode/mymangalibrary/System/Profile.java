@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
 
 /**
  * Created by ONi on 05/11/2017.
@@ -87,5 +88,9 @@ public class Profile {
         result.put(FinalVariables.PASSWORDKEY, password);
 
         return result;
+    }
+
+    public byte[] getCredBytes(){
+        return String.format("%s:%s",username, password).getBytes();
     }
 }

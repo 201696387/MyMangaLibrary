@@ -10,15 +10,16 @@ import android.webkit.WebViewClient;
 
 import ca.jfmcode.mymangalibrary.R;
 
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
+
 public class ActivitySignUp extends AppCompatActivity {
 
     private WebView myanimelist;
-    private final String URL = "https://myanimelist.net/register.php?from=%2F";
 
     private class MyWebViewClient extends WebViewClient{
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (Uri.parse(url).getHost().equals(URL)) {
+            if (Uri.parse(url).getHost().equals(SIGNUPURL)) {
                 return false;
             }
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -38,6 +39,6 @@ public class ActivitySignUp extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 
         myanimelist.setWebViewClient(new MyWebViewClient());
-        myanimelist.loadUrl(URL);
+        myanimelist.loadUrl(SIGNUPURL);
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryLight">
+
+    <ImageView
+        android:id="@+id/cell_search_imageIV"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cell_search_titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Manga Title"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>

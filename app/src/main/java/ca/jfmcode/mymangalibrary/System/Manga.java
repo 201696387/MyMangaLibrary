@@ -1,8 +1,11 @@
 package ca.jfmcode.mymangalibrary.System;
 
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
+
 /**
  * Created by ONi on 05/11/2017.
  */
+
 
 public class Manga {
     //region private variables
@@ -10,78 +13,200 @@ public class Manga {
     private String title;
     private String english;
     private String synonyms;
-    private int episodes;
+    private int chapters;
+    private int volumes;
+    private double score;
     private String type;
     private String status;
     private String start_date;
     private String end_date;
     private String synopsis;
     private String image;
+
+    private String URL;
     //endregion
+
+    //region Manga constructor method
+
+    public Manga(String id, String title, String english, String synonyms, String chapters, String volumes, String score, String type, String status, String start_date, String end_date, String synopsis, String image) {
+        this.id = Integer.parseInt(id);
+        this.title = title;
+        this.english = english;
+        this.synonyms = synonyms;
+        this.chapters = Integer.parseInt(chapters);
+        this.volumes = Integer.parseInt(volumes);
+        this.score = Double.parseDouble(score);
+        this.type = type;
+        this.status = status;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.synopsis = synopsis;
+        this.image = image;
+        this.URL = "";
+    }
+
+    public Manga(int id, String title, String english, String synonyms, int chapters, int volumes, double score, String type, String status, String start_date, String end_date, String synopsis, String image, String URL) {
+        this.id = id;
+        this.title = title;
+        this.english = english;
+        this.synonyms = synonyms;
+        this.chapters = chapters;
+        this.volumes = volumes;
+        this.score = score;
+        this.type = type;
+        this.status = status;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.synopsis = synopsis;
+        this.image = image;
+        this.URL = URL;
+    }
+
+    //endregion
+
+    //region Getter methods
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getEnglish() {
+        return english;
+    }
+
+    public String getSynonyms() {
+        return synonyms;
+    }
+
+    public int getChapters() {
+        return chapters;
+    }
+
+    public int getVolumes() {
+        return volumes;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    //endregion
+
+    //region Setter methods
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
+
+    public void setSynonyms(String synonyms) {
+        this.synonyms = synonyms;
+    }
+
+    public void setChapters(int chapters) {
+        this.chapters = chapters;
+    }
+
+    public void setVolumes(int volumes) {
+        this.volumes = volumes;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    //endregion
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Manga manga = (Manga) o;
+
+        return id == manga.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    public boolean hasNewChapter(Object o){
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Manga manga = (Manga) o;
+
+        if (this.chapters < manga.chapters)
+            return true;
+
+        return false;
+    }
 }
-
-/* MYANIMELIST API INFO
-
-Search Methods
-
-    Anime/Manga Search
-
-        Allows authenticating user to search anime/manga titles.
-
-        URL:
-        https://myanimelist.net /api/anime|manga/search.xml?q=full+metal
-
-        Formats:
-        xml
-
-        HTTP Method(s):
-        GET
-
-        Requires Authentication:
-        true
-
-        Parameters:
-
-            q. Required. URL encoded string of the anime/manga to search for.
-                Example: https://myanimelist.net /api/anime/search.xml?q=bleach
-
-        Response:
-        Success: 200 status code, XML data for anime/manga.
-        Failure: 204 status code (no content).
-
-        Example Response:
-
-        <?xml version="1.0" encoding="utf-8"?>
-        <anime>
-          <entry>
-            <id>2889</id>
-            <title>Bleach - The DiamondDust Rebellion</title>
-            <english>Bleach: Diamond Dust Rebellion</english>
-            <synonyms>Bleach: The Diamond Dust Rebellion - M&Aring;
-            Bleach - The DiamondDust Rebellion - Mou Hitotsu no Hyourinmaru</synonyms>
-            <episodes>1</episodes>
-            <type>Movie</type>
-            <status>Finished Airing</status>
-            <start_date>2007-12-22</start_date>
-            <end_date>2007-12-22</end_date>
-            <synopsis>A valuable artifact known as &amp;quot;King's Seal&amp;quot; is stolen
-            by a mysterious group of people during transport in Soul Society. Hitsugaya Toushiro,
-            the 10th division captain of Gotei 13, who is assigned to transport the seal fights the
-            leader of the group and shortly after goes missing. After the incident, Seireitei declares
-            Hitsugaya a traitor and orders the capture and execution of Hitsugaya. Kurosaki Ichigo
-            refuses to believe this, and along with Matsumoto Rangiku, Kuchiki Rukia and Abarai Renji
-            swear to uncover the real mastermind of the stolen seal, find Hitsugaya and clear his name.
-            Meanwhile, a rogue Hitsugaya searches for the perpetrators and uncovers a
-            dark secret regarding a long dead shinigami. (from ANN)</synopsis>
-            <image>https://myanimelist.cdn-dena.com/images/anime/6/4052.jpg</image>
-          </entry>
-        </anime>
-
-
-
-        Usage Examples:
-
-            CURL:
-            curl -u user:password -d https://myanimelist.net/api/anime/search.xml?q=naruto
-
-//*/

@@ -7,9 +7,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import ca.jfmcode.mymangalibrary.R;
-import ca.jfmcode.mymangalibrary.System.FinalVariables;
 import ca.jfmcode.mymangalibrary.System.MangaLibrarySystem;
 import ca.jfmcode.mymangalibrary.Tools.CheckingSystem;
+
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
 
 public class ActivityLaunch extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class ActivityLaunch extends AppCompatActivity {
     }
 
     public void callLoginActivity(){
-        startActivityForResult(new Intent(ActivityLaunch.this, ActivityLogin.class), FinalVariables.LOGINREQCODE);
+        startActivityForResult(new Intent(ActivityLaunch.this, ActivityLogin.class), LOGINREQCODE);
     }
 
     private void systemChecked(){
@@ -56,11 +57,11 @@ public class ActivityLaunch extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == FinalVariables.LOGINREQCODE) { //Login Activity
-            if(resultCode == FinalVariables.EXITAPPCODE){ //exit app
+        if(requestCode == LOGINREQCODE) { //Login Activity
+            if(resultCode == EXITAPPCODE){ //exit app
                 finish();
             }
-            if(resultCode == FinalVariables.UPDATEMANGAINFOCODE){
+            if(resultCode == UPDATEMANGAINFOCODE){
                 MangaLibrarySystem.getInstance().updateMangaInfo(ActivityLaunch.this, loading);
             }
         }

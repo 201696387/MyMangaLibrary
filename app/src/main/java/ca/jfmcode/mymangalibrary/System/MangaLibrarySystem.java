@@ -6,9 +6,13 @@ import android.net.NetworkInfo;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import ca.jfmcode.mymangalibrary.Tools.CheckingSystem;
 import ca.jfmcode.mymangalibrary.Tools.FileCheckListener;
 import ca.jfmcode.mymangalibrary.Tools.InternetCheckListener;
+
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
 
 /**
  * Created by ONi on 04/11/2017.
@@ -16,11 +20,15 @@ import ca.jfmcode.mymangalibrary.Tools.InternetCheckListener;
 
 public class MangaLibrarySystem {
 
+    //region private variables
     private boolean gotSysFiles = false;
     private boolean gotFiles = false;
     private boolean gotInternet = false;
 
     private CheckingSystem checkingSystem;
+
+    private ArrayList<Manga> mangaList;
+    //endregion
 
     //region MangaLibrarySystem singleton method
     private static final MangaLibrarySystem ourInstance = new MangaLibrarySystem();
@@ -30,6 +38,17 @@ public class MangaLibrarySystem {
     }
 
     private MangaLibrarySystem() {
+        mangaList = new ArrayList<>();
+    }
+    //endregion
+
+    //region Getter + Setter methods
+    public ArrayList<Manga> getMangaList(){
+        return mangaList;
+    }
+
+    public void setMangaList(ArrayList<Manga> input){
+        mangaList = input;
     }
     //endregion
 
@@ -131,12 +150,14 @@ public class MangaLibrarySystem {
         //PART 3 -- MANGALIST UPDATE
         //TODO: check if Manga info changed
         incrementPB(progressBar, 25);
+        updateNotification(context, progressBar);
     }
 
     public void updateNotification(final Context context, final ProgressBar progressBar){
         //PART 4 -- NOTIFICATION
         //TODO: check if Everything works fine
-        //incrementPB(progressBar, 25);
+        incrementPB(progressBar, 25);
+        allDone();
     }
 
     private void allDone(){

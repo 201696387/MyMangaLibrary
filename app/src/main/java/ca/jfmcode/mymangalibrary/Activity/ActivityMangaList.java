@@ -10,6 +10,8 @@ import android.view.View;
 
 import ca.jfmcode.mymangalibrary.R;
 
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
+
 public class ActivityMangaList extends AppCompatActivity {
 
     private final int MANGACODE = 456;

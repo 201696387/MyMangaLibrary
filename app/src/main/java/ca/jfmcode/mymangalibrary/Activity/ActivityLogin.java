@@ -15,9 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import ca.jfmcode.mymangalibrary.R;
-import ca.jfmcode.mymangalibrary.System.FinalVariables;
 import ca.jfmcode.mymangalibrary.System.MALSystem;
 import ca.jfmcode.mymangalibrary.Tools.MALAuthListener;
+
+import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -87,7 +88,7 @@ public class ActivityLogin extends AppCompatActivity {
         MALSystem.getInstance().authenticateProfile(ActivityLogin.this, user, pass, new MALAuthListener() {
             @Override
             public void success() {
-                setResult(FinalVariables.UPDATEMANGAINFOCODE);
+                setResult(UPDATEMANGAINFOCODE);
                 finish();
             }
 
@@ -111,7 +112,7 @@ public class ActivityLogin extends AppCompatActivity {
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        setResult(FinalVariables.EXITAPPCODE);
+                        setResult(EXITAPPCODE);
                         finish();
                     }
 
