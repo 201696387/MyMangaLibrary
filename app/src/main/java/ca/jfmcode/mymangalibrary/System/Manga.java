@@ -10,18 +10,18 @@ import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
 public class Manga {
     //region private variables
     private int id;
-    private String title;
-    private String english;
+    private String title; //x
+    private String english; //x
     private String synonyms;
-    private int chapters;
+    private int chapters; //x
     private int volumes;
-    private double score;
+    private double score; //x
     private String type;
-    private String status;
+    private String status; //x
     private String start_date;
     private String end_date;
-    private String synopsis;
-    private String image;
+    private String synopsis; //x
+    private String image; //x
 
     private String URL;
     //endregion

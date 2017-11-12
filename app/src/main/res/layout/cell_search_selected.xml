@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryLight">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/cell_selected_titleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manga Title"
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/cell_selected_englishTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manga Title Eng"
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/cell_selected_imageIV"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/cell_selected_scoreTV"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="score"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/cell_selected_chapterTV"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="chapter"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/cell_selected_statusTV"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="status"
+                android:textSize="14sp"
+                android:textColor="@color/colorAccent"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/cell_selected_synopsisTV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="synopsis"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

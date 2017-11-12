@@ -12,7 +12,7 @@ import java.net.URL;
 /**
  * Created by ONi on 11/11/2017.
  *
- * Special thanks to Eric Schmidt and kalyan pvs from stackoverflow for this
+ * Special thanks to Eric Schmidt and kalyan_pvs from stackoverflow for this
  */
 
 public class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {

@@ -17,6 +17,8 @@ import ca.jfmcode.mymangalibrary.R;
 import ca.jfmcode.mymangalibrary.System.MALSystem;
 import ca.jfmcode.mymangalibrary.System.Manga;
 import ca.jfmcode.mymangalibrary.System.MangaFoundAdapter;
+import ca.jfmcode.mymangalibrary.System.MangaLibrarySystem;
+import ca.jfmcode.mymangalibrary.System.MangaSelectedAdapter;
 import ca.jfmcode.mymangalibrary.Tools.MangaSearchListener;
 
 import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
@@ -29,7 +31,11 @@ public class ActivityMangaAdd extends AppCompatActivity {
     private ListView foundMangaListView;
 
     private ArrayList<Manga> mangaFoundList;
-    private int mangaSelectionIndex=-1;
+    private final int DEFAULTPOS = -1;
+    private int mangaSelectionIndex = DEFAULTPOS;
+    private MangaFoundAdapter mangaFoundAdapter;
+
+    private boolean isList = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +67,32 @@ public class ActivityMangaAdd extends AppCompatActivity {
         foundMangaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setMangaSelection(position);
+                if(isList)
+                    setMangaSelection(position);
             }
         });
+
+        mangaFoundList = new ArrayList<>();
+        mangaFoundAdapter = new MangaFoundAdapter(ActivityMangaAdd.this, R.layout.cell_search_list, mangaFoundList);
+        foundMangaListView.setAdapter(mangaFoundAdapter);
     }
 
-    private void updateListView(){
-        MangaFoundAdapter mangaFoundAdapter = new MangaFoundAdapter(ActivityMangaAdd.this, R.layout.cell_search_list, mangaFoundList);
+    private void updateListViewFromList(){
+        isList = true;
+
+        mangaFoundAdapter = new MangaFoundAdapter(ActivityMangaAdd.this, R.layout.cell_search_list, mangaFoundList);
+        mangaFoundAdapter.notifyDataSetChanged();
         foundMangaListView.setAdapter(mangaFoundAdapter);
+    }
+
+    private void updateListViewFromItem(){
+        isList = false;
+
+        ArrayList<Manga> temp = new ArrayList<>();
+        temp.add(mangaFoundList.get(mangaSelectionIndex));
+
+        MangaSelectedAdapter mangaSelectedAdapter = new MangaSelectedAdapter(ActivityMangaAdd.this, temp);
+        foundMangaListView.setAdapter(mangaSelectedAdapter);
     }
 
     private void searchManga(){
@@ -91,16 +115,44 @@ public class ActivityMangaAdd extends AppCompatActivity {
 
     private void setMangaFoundList(ArrayList<Manga> mangasFound){
         mangaFoundList = mangasFound;
-        setMangaSelection(-1);
+        setMangaSelection(DEFAULTPOS);
 
-        updateListView();
+        updateListViewFromList();
     }
 
     private void setMangaSelection(int pos){
         mangaSelectionIndex = pos;
+
+        if(mangaSelectionIndex != DEFAULTPOS){
+            updateListViewFromItem();
+        }
     }
 
     private void saveManga(){
-        Manga mangaSelection = mangaFoundList.get(mangaSelectionIndex);
+        if(mangaSelectionIndex==DEFAULTPOS){
+            Toast.makeText(this, "Please search and select a manga", Toast.LENGTH_SHORT).show(); //TODO: Find a better way to display a message to the user
+
+            return;
+        }
+
+        if(mangaFoundList!=null && mangaSelectionIndex<mangaFoundList.size() && mangaSelectionIndex>-1) {
+            Manga mangaSelection = mangaFoundList.get(mangaSelectionIndex);
+
+            MangaLibrarySystem.getInstance().addToMangaList(mangaSelection);
+
+            setResult(MANGASAVED);
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mangaSelectionIndex == DEFAULTPOS){
+            super.onBackPressed();
+        } else{
+            updateListViewFromList();
+        }
+
+        setMangaSelection(DEFAULTPOS);
     }
 }

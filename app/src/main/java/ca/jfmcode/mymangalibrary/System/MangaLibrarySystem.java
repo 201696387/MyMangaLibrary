@@ -50,6 +50,11 @@ public class MangaLibrarySystem {
     public void setMangaList(ArrayList<Manga> input){
         mangaList = input;
     }
+
+    public void addToMangaList(Manga input){
+        if(!mangaList.contains(input))
+            mangaList.add(input);
+    }
     //endregion
 
     private void incrementPB(ProgressBar progressBar, int amount){

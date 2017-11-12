@@ -54,7 +54,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/act_mangaadd_saveLL"
         android:layout_below="@+id/act_mangaadd_urlET"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"/>
 
     <LinearLayout
         android:id="@+id/act_mangaadd_saveLL"
