@@ -15,6 +15,7 @@ public class FinalVariables { //NOTE: not ignored from Android Studio integrated
     //region MangaList ForResult codes
     public static final int MANGACODE = 456;
     public static final int MANGASAVED = 457;
+    public static final int MANGAVIEW = 555;
     //endregion
 
     public static final String SIGNUPURL = "https://myanimelist.net/register.php?from=%2F";

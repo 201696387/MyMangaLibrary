@@ -7,7 +7,7 @@ import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
  */
 
 
-public class Manga {
+public class Manga implements java.io.Serializable{
     //region private variables
     private int id;
     private String title; //x
@@ -24,6 +24,7 @@ public class Manga {
     private String image; //x
 
     private String URL;
+    private boolean unread = false;
     //endregion
 
     //region Manga constructor method
@@ -122,6 +123,10 @@ public class Manga {
         return URL;
     }
 
+    public boolean isUnread(){
+        return unread;
+    }
+
     //endregion
 
     //region Setter methods
@@ -199,14 +204,14 @@ public class Manga {
         return id;
     }
 
-    public boolean hasNewChapter(Object o){
-        if (o == null || getClass() != o.getClass()) return false;
+    public void hasNewChapter(Object o){
+        if (o == null || getClass() != o.getClass()) return;
 
         Manga manga = (Manga) o;
 
         if (this.chapters < manga.chapters)
-            return true;
+            unread=true;
 
-        return false;
+        unread=false;
     }
 }

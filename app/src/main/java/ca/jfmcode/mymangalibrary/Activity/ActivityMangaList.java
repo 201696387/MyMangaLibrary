@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 import ca.jfmcode.mymangalibrary.R;
 import ca.jfmcode.mymangalibrary.System.Manga;
+import ca.jfmcode.mymangalibrary.System.MangaFileManager;
+import ca.jfmcode.mymangalibrary.System.MangaLibraryAdapter;
 import ca.jfmcode.mymangalibrary.System.MangaLibrarySystem;
 
 import static ca.jfmcode.mymangalibrary.System.FinalVariables.*;
@@ -60,14 +62,22 @@ public class ActivityMangaList extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        updateLibrary();
+    }
+
     private void updateLibrary(){
         ArrayList<Manga> temp = MangaLibrarySystem.getInstance().getMangaList();
 
-        //TODO: Write custom adapter for the manga library <- next step (sort the manga if read or unread)
+        MangaLibraryAdapter mangaLibraryAdapter = new MangaLibraryAdapter(ActivityMangaList.this, R.layout.cell_manga_list, temp);
+        myLibrary.setAdapter(mangaLibraryAdapter);
     }
 
     private void libraryItemSelected(int pos){
-        //TODO: When clicking a manga, jump to ActivityMangaViewInfo with the int position
+        startActivityForResult(new Intent(ActivityMangaList.this, ActivityMangaViewInfo.class), MANGAVIEW);
     }
 
     private void floatingAddButton(){
@@ -80,8 +90,12 @@ public class ActivityMangaList extends AppCompatActivity {
 
         if(requestCode == MANGACODE){
             if(resultCode == MANGASAVED){
-
+                updateLibrary();
+                int count = MangaLibrarySystem.getInstance().getMangaList().size();
+                MangaFileManager.getInstance().writeMangaListFile(ActivityMangaList.this, MangaLibrarySystem.getInstance().getMangaList());
             }
+        } else if(requestCode == MANGAVIEW){
+
         }
     }
 }

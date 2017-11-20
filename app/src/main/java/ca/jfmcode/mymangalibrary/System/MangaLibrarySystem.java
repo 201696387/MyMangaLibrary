@@ -3,6 +3,7 @@ package ca.jfmcode.mymangalibrary.System;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -80,32 +81,30 @@ public class MangaLibrarySystem {
             @Override
             public void allFilesFound() {
                 incrementPB(progressBar, 15);
+                MangaFileManager.getInstance().readMangaListFile(context);
 
-                Toast.makeText(context, "All Files found", Toast.LENGTH_SHORT).show(); //debug
-                //TODO: log file_check success
+                Log.i("MangaLibrarySystem_init","All Files found");
             }
 
             @Override
             public void noFiles() {
                 incrementPB(progressBar, 25);
 
-                Toast.makeText(context, "Files not found", Toast.LENGTH_SHORT).show(); //debug
-                //TODO: log file_check all files not found
+                Log.i("MangaLibrarySystem_init","Files not found");
             }
 
             @Override
             public void missingMangaFile() {
                 incrementPB(progressBar, 15);
 
-                Toast.makeText(context, "Manga file not found", Toast.LENGTH_SHORT).show(); //debug
-                //TODO: log file_check manga file not found
+                Log.i("MangaLibrarySystem_init","Manga file not found");
             }
 
             @Override
             public void error(String message) {
                 checkingSystem.error(message);
 
-                //TODO: log file_check error message
+                Log.e("MangaLibrarySystem_init",message);
             }
         });
 
@@ -115,8 +114,7 @@ public class MangaLibrarySystem {
             public void internetOK() {
                 incrementPB(progressBar, 25);
 
-                Toast.makeText(context, "Internet is ok", Toast.LENGTH_SHORT).show(); //debug
-                //TODO: log internet_check success
+                Log.i("connection_checking","Internet is ok");
 
                 authentication(context, progressBar, checkingSystem); //PART 2.5 <-- HERE
             }
@@ -125,7 +123,7 @@ public class MangaLibrarySystem {
             public void error(String message) {
                 checkingSystem.error(message);
 
-                //TODO: log internet_check error message
+                Log.e("connection_checking",message);
             }
         });
         //*/
@@ -135,7 +133,7 @@ public class MangaLibrarySystem {
 
         //PART 2.5 -- AUTHENTICATION
         if(gotInternet) { //Check if there's a connection to https://myanimelist.net/
-            if (gotSysFiles) { //Check if encrypted File exists
+            if (gotSysFiles) { //Check if File exists
                 MangaFileManager.getInstance().readSysFile(context);
 
                 if(MALSystem.getInstance().isAuth()){

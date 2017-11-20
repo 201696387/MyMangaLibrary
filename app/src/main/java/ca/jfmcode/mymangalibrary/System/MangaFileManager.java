@@ -1,6 +1,8 @@
 package ca.jfmcode.mymangalibrary.System;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,18 +70,18 @@ public class MangaFileManager {
     //endregion
 
     //region MangaListFile I/O methods
-    public void writeMangaListFile(Context context, ArrayList<Manga> input){ //TODO: test the io methods for the mangalists
+    public void writeMangaListFile(Context context, ArrayList<Manga> input){
         HashMap<String, Object> mangaListHashMap = new HashMap<>();
 
         mangaListHashMap.put(MANGALISTKEY, input);
 
-        writeFile(context, sysFilename, mangaListHashMap);
+        writeFile(context, mangaListFilename, mangaListHashMap);
     }
 
     public void readMangaListFile(Context context){
-        HashMap<String, Object> output = (HashMap<String, Object>) readFile(context, sysFilename);
+        HashMap<String, ArrayList<Manga>> output = (HashMap<String, ArrayList<Manga>>) readFile(context, mangaListFilename);
 
-        ArrayList<Manga> mangaList = (ArrayList<Manga>) output.get(MANGALISTKEY);
+        ArrayList<Manga> mangaList = output.get(MANGALISTKEY);
 
         MangaLibrarySystem.getInstance().setMangaList(mangaList);
     }
@@ -103,9 +105,9 @@ public class MangaFileManager {
             objectOutputStream.close();
             fileOutputStream.close();
 
-            //TODO: Log success write message
+            Log.i("writeFile success", filename);
         } catch (Exception e){
-            //TODO: Log error message
+            Log.e("writeFile error", filename+" : "+e.getMessage());
         }
     }
 
@@ -124,9 +126,9 @@ public class MangaFileManager {
             objectInputStream.close();
             fileInputStream.close();
 
-            //TODO: Log success read message
+            Log.i("readFile success", filename);
         } catch (Exception e){
-            //TODO: Log error message
+            Log.e("readFile error", filename+" : "+e.getMessage());
         }
 
         return result;
